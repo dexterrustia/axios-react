@@ -1,0 +1,68 @@
+ 
+
+.indexPage{
+    background: #e9ebee;
+    height: 100vh;
+    width: 100vw;
+    .Header{
+        background: #3c5a99;
+        height: auto; 
+        padding: 10px; 
+        color: white;
+        font-size: small;
+        .LoginForm {
+            input[type='text'],
+            input[type='password'] {
+                width: inherit;
+            }
+            .LoginBtn{
+                margin-top: 19px;
+                margin-left: -17px;
+                background: #4267b2;
+                color: white;
+                border: 2px solid #546ea9;
+                font-weight: bold;
+            }
+        }
+    } 
+    .genderColumn{ 
+        display: inline-flex; 
+        .form-check { 
+            margin-right: 20px;
+        }
+    }
+    .policyRights{
+        width: 345px;
+        display: block;
+        font-size: small;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        margin-bottom: 25px;
+    }
+
+}
+
+.CreatePost{
+    background: white;
+    margin-bottom: 10px;
+    .imgProfile {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+}
+
+.post{ 
+    margin-bottom: 10px;
+    .profile{
+        margin-left: -25px;
+        .name{
+            margin-bottom:0px
+        }
+        .postdate{
+            font-size: x-small;
+        }
+    }
+}
