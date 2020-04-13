@@ -73,17 +73,17 @@ class Comment extends Component {
         }
         return (  
             <Fragment>
-                <Row style={{marginTop: '10px'}}>
+                <Row style={{marginTop: '10px'}} className="commentComponent">
                     <Col xm={2} md={2} className="ProfileInComment" style={comStyle.ProfileInComment}>
                         <img src="RestAPIs/samplePP.png" className="profilePicture" alt="Smiley face" height="40" width="40" style={{borderRadius:'20px'}}></img>
                     </Col>
-                    <Col  xm={10} md={10}>
+                    <Col xm={10} md={10} style={{display:'inline-flex'}}>
                         <div style={comStyle.commentContrainer}>
                             <span className="commentName" style={comStyle.commentName}>{userId.firstName + ' ' + userId.lastName}</span>
                             {body}
                         </div> 
                         <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic"> 
+                        <Dropdown.Toggle variant="outline-primary" id="dropdown-basic"> 
                             <IoIosMore />
                         </Dropdown.Toggle>
 

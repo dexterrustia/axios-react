@@ -44,14 +44,58 @@
 
 }
 
-.CreatePost{
+ 
+.createPostContainer {
+    background: #000000b8;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: -600px;   
+} 
+
+.createPost{  
     background: white;
+    margin-top: 5px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    z-index: 2;
+    position: relative;  
     .imgProfile {
         width: 60px;
         height: 60px;
-        border-radius: 50%;
+        border-radius: 50%; 
     }
+    .newCommentBox{
+        border: none;
+        :focus {
+            outline-width: 0 !important;
+            font-size: 1.8rem;
+            background: red;
+        } 
+    }
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none !important;   
+    }
+    .postActions{
+        background: #f5f6f7;
+        color: gray;
+        font-weight: bold;
+        margin: 5px;
+        padding: 5px 10px;
+        border-radius: 17px;
+    }
+    .createPostControls{
+        
+
+    }
+    
 }
 
 .post{ 
@@ -63,6 +107,51 @@
         }
         .postdate{
             font-size: x-small;
+        } 
+        .dropdown{
+            float: right;
+            margin-top: -68px;
+            margin-right: -45px;
+            
+            .dropdown-toggle::after {
+                content: none !important;
+            }
+            .btn-outline-primary {
+                color: black;
+                border: none;
+                :horver{
+                    background: none !important;
+                }
+            }
+            a.dropdown-item {
+                font-size: x-small;
+            }
+            .dropdown-menu{
+                min-width: 1rem !important;
+                font-size: 1rem !important;
+            }
+        }
+    }
+}
+.commentComponent{
+    
+    .dropdown{  
+        .dropdown-toggle::after {
+            content: none !important;
+        }
+        .btn-outline-primary {
+            color: black;
+            border: none;
+            :horver{
+                background: none !important;
+            }
+        }
+        a.dropdown-item {
+            font-size: x-small;
+        }
+        .dropdown-menu{
+            min-width: 1rem !important;
+            font-size: 1rem !important;
         }
     }
 }

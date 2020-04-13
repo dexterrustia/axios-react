@@ -1,15 +1,11 @@
 import React, { Component, Fragment } from 'react'
 //Bootstrap components
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Card from 'react-bootstrap/Card'; 
+import { Row, Col, Dropdown, Form } from 'react-bootstrap';  
 import axios from 'axios';
 
 //React icons
-import { IoIosShareAlt,IoIosThumbsUp, IoIosStats,} from "react-icons/io";
+import { IoIosShareAlt,IoIosThumbsUp, IoIosStats, IoIosMore } from "react-icons/io";
 import Comment from './Comment';
 
 import Pusher from 'pusher-js';
@@ -23,7 +19,7 @@ class Post extends Component {
     } 
     constructor(props) { 
         super(props);
-        axios.get(`http://localhost:3200/comment`,{ crossdomain: true })
+        axios.get(`http://localhost:3200/comment/${this.props.post._id}`,{ crossdomain: true })
        // axios.get('RestAPIs/comments.json')
             .then(res => { 
                 console.log(res)
@@ -44,10 +40,8 @@ class Post extends Component {
         )
     }
     AddNewComment = (e) => {
-        e.preventDefault();
-
-        console.log(`e value ${e.target.value}`)
-        
+        e.preventDefault(); 
+        console.log(`e value ${e.target.value}`) 
 
         const newComment = {
             postId: this.props.post._id,
@@ -58,25 +52,43 @@ class Post extends Component {
             .then(doc => {  
                 this.setState( { 
                     newComment: ''
-                }) 
-
+                })  
             }) 
     } 
 
-    componentDidMount = () => { 
-        const pusher = new Pusher('7cf8ab01384a020e60c7', {
-            cluster: 'ap1',
-            forceTLS: true
-        });
-    
-        const channel = pusher.subscribe('Comment');
-        channel.bind('create', function (data) {  
-            console.log(`posts`)
-            this.setState({ comments: [...this.state.comments, data] })
-            console.log(`pusher`)
-            console.log(data)
-            
-        }.bind(this)); 
+    deletePost = () => { 
+        console.log('this is click!!!')
+        console.log(`posted ID:${this.props.post._id}`)
+        axios.delete(`http://localhost:3200/post/${this.props.post._id}`)
+        .then(doc => {  
+            console.log(`Post delete : ${doc}`)
+            console.dir(doc)
+        }) 
+
+    }
+
+    componentDidMount = () => {
+         const pusher = new Pusher('7cf8ab01384a020e60c7', {
+                cluster: 'ap1',
+                forceTLS: true
+            });
+            console.log(`pusher: Comment${this.props._id}`)
+            const channel = pusher.subscribe(`Comment`);
+            channel.bind('create', function (data) {  
+                console.log(`posts`)
+
+                if (data.postId == this.props.post._id) { 
+                    /*
+                    *   This is temporary and should not be this way.
+                        This implementation is pulling comments to that is not belong to a post.
+                    *   Corrent post should only be the one to fire request to server
+                    */ 
+                    this.setState({ comments: [...this.state.comments, data] })
+                }
+                console.log(`pusher`)
+                console.log(data) 
+            }.bind(this));  
+        
 
     }
     render() {
@@ -113,6 +125,18 @@ class Post extends Component {
                             <Col xs={10} md={10} className="profile"> 
                                 <Card.Title className="name">{userId.firstName + ' ' + userId.lastName}</Card.Title> 
                                 <span className="postdate">{postdate}</span>
+                                <div>
+                                <Dropdown>
+                                <Dropdown.Toggle variant="outline-primary" id="dropdown-basic"> 
+                                    <IoIosMore />
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                            <Dropdown.Item onClick={this.deletePost}>Remove</Dropdown.Item>
+                                        <Dropdown.Item>Edit</Dropdown.Item> 
+                                </Dropdown.Menu>
+                                </Dropdown>
+                                </div>
                             </Col> 
                         </Row>
                         <Row className="show-grid">  

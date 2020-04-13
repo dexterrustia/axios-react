@@ -25,11 +25,7 @@ class Home extends Component {
 
             }).catch(err => { 
                 console.log(`Error: ${err}`)
-            })
-        
-
-
- 
+            }) 
     }
 
     componentDidMount = () => { 
@@ -48,11 +44,12 @@ class Home extends Component {
         }.bind(this)); 
 
     }
+     
     
     render() {
         return (
             <Fragment>   
-                <div style={{background:'#e9ebee'}}>
+                <div style={{ background: '#e9ebee', minHeight: '100vh' }}>
                     <Row>
                         <Col xm={4} md={4} />
                         <Col xm={4} md={4} >
