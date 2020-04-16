@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, useEffect ,Fragment } from 'react'
 import { Redirect } from "react-router-dom";
 
 //Bootstrap components
@@ -8,61 +8,62 @@ import Form from 'react-bootstrap/Form';
 
 import axios from 'axios'
 
-class Login extends Component {
+const Login = () => { 
 
-    state = {
-        numberOrEmail: '',
-        password: '',
-        route: ''
-    } 
+    const [numberOrEmail, setNumberOrEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [route, setRoute] = useState('');
     
-    handleStateChanges = (e) => {    
-        this.setState({ [e.target.name]: e.target.value });
+    const handleStateChanges = (e) => {    
+        console.dir(e.target);
+        const { name, value } = { ...e.target };
+        console.log(`name : ${e.target.name}`);
+        console.log(`value : ${value}`);
+        
+        (e.target.name == "password") ? setPassword(value) : setNumberOrEmail(value) 
     } 
-    OnLogin = (e) => { 
+    const OnLogin = (e) => { 
         e.preventDefault();
         const user = {
-            numberOrEmail: this.state.numberOrEmail,
-            password: this.state.password
-        }
+            numberOrEmail: numberOrEmail,
+            password: password
+        };
         console.log(`user : ${user}`)
         axios.post('http://localhost:3200/user/login', user)
             .then(res => { 
                 console.dir(res.data);
                 console.log(`len : ${res.data.length}`)
-                if(res.data.length == 1)
-                    this.setState({route:'/home'})
+                if(res.data.length == 1) 
+                    setRoute('/home')
             })
             .catch(err => { 
-                console.log(`err : ${err}`)
+                console.log(`err : ${err}`);
             })
+    } 
+    if (route == "/home") {  
+        console.log(`route22 : ${route}`)
+        return  (<Redirect to='/home' />)
     }
-
-    render() {
-        if (this.state.route != '') {
-            return <Redirect to={this.state.route} />
-        }
-        return (
-            <Fragment>
-                <Form className="LoginForm" onSubmit={this.OnLogin}>
-                    <Row>
-                        <Col xm={5} md={5} >
-                            <span>Email or Phone</span>
-                            <input type="text" name="numberOrEmail" onChange={this.handleStateChanges}/>
-                        </Col>    
-                        <Col xm={5} md={5} >
-                            <span>Password</span>
-                            <input type="password" name="password" onChange={this.handleStateChanges} />
-                            <span>Forgot account?</span>
-                        </Col>   
-                        <Col xm={2} md={2} > 
-                            <input type="submit" value="Login" className="LoginBtn"/>
-                        </Col>
-                    </Row>
-                </Form>
-            </Fragment>
-        )
-    }
+    return (
+        <Fragment>
+            <Form className="LoginForm" onSubmit={OnLogin}>
+                <Row>
+                    <Col xm={5} md={5} >
+                        <span>Email or Phone</span>
+                        <input type="text" name="numberOrEmail" onChange={handleStateChanges}/>
+                    </Col>    
+                    <Col xm={5} md={5} >
+                        <span>Password</span>
+                        <input type="password" name="password" onChange={handleStateChanges} />
+                        <span>Forgot account?</span>
+                    </Col>   
+                    <Col xm={2} md={2} > 
+                        <input type="submit" value="Login" className="LoginBtn"/>
+                    </Col>
+                </Row>
+            </Form>
+        </Fragment>
+    ) 
 }
 
 export default Login

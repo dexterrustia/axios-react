@@ -2,7 +2,7 @@ import React, { Component,Fragment } from 'react'
 import axios from 'axios'
 import Post from '../components/Post' 
 import CreatePost from '../components/CreatePost';
-import { Row, Col } from 'react-bootstrap'; 
+import { Row, Col } from 'react-bootstrap';  
 
 import Pusher from 'pusher-js';
 
@@ -15,8 +15,8 @@ class Home extends Component {
     constructor(props) { 
         super(props);
         
-        axios.get(`http://localhost:3200/post`) 
-        //axios.get('RestAPIs/posts.json')
+        //axios.getAllPost()
+        axios.get(`http://localhost:3200/post`)  
             .then(res => { 
                 console.table([...res.data])
                 this.setState({

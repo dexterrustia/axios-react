@@ -4,15 +4,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';  
 
 import SginUp from '../components/SginUp';
-import Login from '../components/Login';
-import ThemeContextProvider from '../context/ThemeContext';
+import Login from '../components/Login'; 
 
 class IndexPage extends Component { 
 
-    render() {
-        console.log(this.contextType)
-        return (
-            <ThemeContextProvider>
+    render() { 
+        return ( 
                 
                 <div className="indexPage">
                     <div className="Header">
@@ -38,13 +35,12 @@ class IndexPage extends Component {
                             </h2>
                         </Col> 
                         <Col xm={3} md={3}> 
-                            <SginUp / >
+                            <SginUp/>
                         </Col>
                             
                         <Col xm={3} md={3} /> 
                     </Row>
-                </div> 
-            </ThemeContextProvider>
+                </div>  
         )
     }
 }

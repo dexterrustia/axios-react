@@ -2,31 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom'; 
 import { createBrowserHistory } from "history";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-
-import './index.css';
+ 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';  
 import './styles/default.scss'
-
 
 import Home from './views/Home' 
 import IndexPage from './views/index'
 
+//Test indexs
+import TestApp from './TEST ENVIRONMENT/Context/testApp'
+import TestIndex from './TEST ENVIRONMENT/TestIndex';
+
 const hist = createBrowserHistory();
 
-ReactDOM.render(
-  // <React.StrictMode>
-  //   <IndexPage />
-  // </React.StrictMode>,
-  <Router history={hist}>
-    <Switch>
-      <Route path="/" exact component={IndexPage} />
-      <Route path="/home"  component={Home} />
-    </Switch>
-  </Router>,
-  document.getElementById("root")
+ReactDOM.render( 
+ <Router history={hist}>
+   <Switch>
+     <Route path="/" exact component={IndexPage} />
+     <Route path="/home"  component={Home} />
+   </Switch>
+ </Router>
+  
+  //TestIndex
+  ,document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
