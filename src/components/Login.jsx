@@ -30,10 +30,10 @@ const Login = () => {
         };
         console.log(`user : ${user}`)
         axios.post('http://localhost:3200/user/login', user)
-            .then(res => { 
-                console.dir(res.data);
-                console.log(`len : ${res.data.length}`)
-                if(res.data.length == 1) 
+            .then(res => {  
+                const { length } = res.data 
+                localStorage.setItem('_id',res.data[0]._id)
+                if(length == 1) 
                     setRoute('/home')
             })
             .catch(err => { 

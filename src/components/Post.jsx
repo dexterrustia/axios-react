@@ -11,7 +11,6 @@ import Comment from './Comment';
 import Pusher from 'pusher-js';
 
 
-
 class Post extends Component { 
     state = {
         comments: [],
@@ -41,11 +40,11 @@ class Post extends Component {
     }
     AddNewComment = (e) => {
         e.preventDefault(); 
-        console.log(`e value ${e.target.value}`) 
-
+        console.log(`e value ${e.target.value}`)  
+        
         const newComment = {
             postId: this.props.post._id,
-            userId: "5e8744c232804b550472f632", //this is temporaty and should bebe comming from session in the future
+            userId: localStorage.getItem('_id'), //"5e8744c232804b550472f632", //this is temporaty and should bebe comming from session in the future
             body: this.state.newComment
         }
         axios.post('http://localhost:3200/comment/create', newComment)

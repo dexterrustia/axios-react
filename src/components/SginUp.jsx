@@ -1,4 +1,5 @@
-import React, { useState, Fragment } from 'react' 
+import React, { useState, Fragment } from 'react';
+import { Redirect } from "react-router-dom";
 
 //Bootstrap components
 import Row from 'react-bootstrap/Row';
@@ -22,6 +23,7 @@ const SginUp = () => {
         gender: 1
     };
     const [user, setUser] = useState(userDefaultValue);
+    const [route, setRoute] = useState('');
 
     const handleStateChanges = (e) => {
         console.log(e)
@@ -51,14 +53,18 @@ const SginUp = () => {
         console.log(`On sign up!!`);
         axios.post('http://localhost:3200/user/SignUp', user)
             .then(res => { 
-                console.log(`res : ${res.data}`);
+                console.log(`res : ${res.data}`); 
+                setRoute('/home')
             })
             .catch(err => { 
                 console.log(`err : ${err}`);
             })
 
     }
- 
+    if (route == "/home") {  
+        console.log(`route22 : ${route}`)
+        return  (<Redirect to='/home' />)
+    }
     return (
         <Fragment> 
             <div>
