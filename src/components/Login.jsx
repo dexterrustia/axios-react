@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,Fragment } from 'react'
+import React, { useState, useEffect ,Fragment, useContext } from 'react'
 import { Redirect } from "react-router-dom";
 
 //Bootstrap components
@@ -7,39 +7,10 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form'; 
 
 import axios from 'axios'
+import { UserContext } from '../context/AuthContext';
 
-const Login = () => { 
-
-    const [numberOrEmail, setNumberOrEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [route, setRoute] = useState('');
-    
-    const handleStateChanges = (e) => {    
-        console.dir(e.target);
-        const { name, value } = { ...e.target };
-        console.log(`name : ${e.target.name}`);
-        console.log(`value : ${value}`);
-        
-        (e.target.name == "password") ? setPassword(value) : setNumberOrEmail(value) 
-    } 
-    const OnLogin = (e) => { 
-        e.preventDefault();
-        const user = {
-            numberOrEmail: numberOrEmail,
-            password: password
-        };
-        console.log(`user : ${user}`)
-        axios.post('http://localhost:3200/user/login', user)
-            .then(res => {  
-                const { length } = res.data 
-                localStorage.setItem('_id',res.data[0]._id)
-                if(length == 1) 
-                    setRoute('/home')
-            })
-            .catch(err => { 
-                console.log(`err : ${err}`);
-            })
-    } 
+const Login = () => {  
+    const { numberOrEmail, password, route, handleStateChanges, OnLogin } = useContext(UserContext);
     if (route == "/home") {  
         console.log(`route22 : ${route}`)
         return  (<Redirect to='/home' />)

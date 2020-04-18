@@ -5,12 +5,13 @@ import Col from 'react-bootstrap/Col';
 
 import SginUp from '../components/SginUp';
 import Login from '../components/Login'; 
+import UserContextProvider from '../context/AuthContext';
 
 class IndexPage extends Component { 
 
     render() { 
         return ( 
-                
+                <UserContextProvider>
                 <div className="indexPage">
                     <div className="Header">
                         
@@ -35,12 +36,15 @@ class IndexPage extends Component {
                             </h2>
                         </Col> 
                         <Col xm={3} md={3}> 
-                            <SginUp/>
+                            <UserContextProvider> 
+                                <SginUp/>
+                            </UserContextProvider>
                         </Col>
                             
                         <Col xm={3} md={3} /> 
                     </Row>
                 </div>  
+                </UserContextProvider>
         )
     }
 }
