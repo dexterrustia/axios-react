@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component,useContext } from 'react'
 //Bootstrap components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';  
 
 import SginUp from '../components/SginUp';
 import Login from '../components/Login'; 
-import UserContextProvider from '../context/AuthContext';
+import UserContextProvider from '../context/AuthContext'; 
 
 class IndexPage extends Component { 
 
-    render() { 
+    render() {   
         return ( 
                 <UserContextProvider>
                 <div className="indexPage">
@@ -35,10 +35,8 @@ class IndexPage extends Component {
                                 Connect with friends and the world around you on Facebook.
                             </h2>
                         </Col> 
-                        <Col xm={3} md={3}> 
-                            <UserContextProvider> 
-                                <SginUp/>
-                            </UserContextProvider>
+                        <Col xm={3} md={3}>   
+                            <SginUp/> 
                         </Col>
                             
                         <Col xm={3} md={3} /> 

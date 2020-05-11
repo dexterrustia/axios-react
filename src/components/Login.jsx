@@ -1,20 +1,14 @@
-import React, { useState, useEffect ,Fragment, useContext } from 'react'
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect ,Fragment, useContext } from 'react' 
 
 //Bootstrap components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'; 
 import Form from 'react-bootstrap/Form'; 
-
-import axios from 'axios'
+  
 import { UserContext } from '../context/AuthContext';
 
 const Login = () => {  
     const { numberOrEmail, password, route, handleStateChanges, OnLogin } = useContext(UserContext);
-    if (route == "/home") {  
-        console.log(`route22 : ${route}`)
-        return  (<Redirect to='/home' />)
-    }
     return (
         <Fragment>
             <Form className="LoginForm" onSubmit={OnLogin}>
